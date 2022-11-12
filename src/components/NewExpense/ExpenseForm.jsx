@@ -48,10 +48,11 @@ const ExpenseForm = (props) => {
         event.preventDefault(); //to not refresh the values when clicking on submit
         const expenseData = {
             title: enteredTitle,
-            amount: enteredAmount,
+            amount: +enteredAmount,
             date: new Date(enteredDate),
         }
         props.onSaveExpenseData(expenseData);
+        props.onCancelClick()
         setEnteredDate('')
         setEnteredTitle('')
         setEnteredAmount('')
@@ -66,7 +67,8 @@ const ExpenseForm = (props) => {
                 </div>
                 <div className='new-expense__control'>
                     <label>Amount</label>
-                    <input type='number' min='0.01' step='0.01' value={enteredAmount} onChange={amountChangeHandler}/>
+                    <input type='number' min='0.01' step='0.01' value={enteredAmount}
+                           onChange={amountChangeHandler}/>
                 </div>
                 <div className='new-expense__control'>
                     <label>Date</label>
@@ -75,6 +77,7 @@ const ExpenseForm = (props) => {
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button type='cancel' onClick={props.onCancelClick}>Cancel</button>
                 <button type='submit'>Add expense</button>
             </div>
         </form>
